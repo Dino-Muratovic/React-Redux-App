@@ -5,21 +5,22 @@ import {fetchQuote} from '../store/actions/quoteActions';
 
 
 
+
 const SwansonQuote = (props) => {
     useEffect(() => {
         //call an action creator
-        props.fetchQuote()
+        props.fetchQuote();        
+    }, []);// dependancy array
 
-
-        
-    }, [props]);// dependancy array
-
+   
    
 
 
     return (
         <div>
             <h1>Swanson Quotes:</h1>
+
+            
             {props.isFetching && <Loader
                 type="TailSpin" 
                 color="#00BFFF"
@@ -27,14 +28,23 @@ const SwansonQuote = (props) => {
                 width={80}
             />}
 
+           
+
             {/* if we have a quote in our state display that quote */}            
-            {props.quote && <h3>"{props.quote}"</h3>}            
+            {props.quote && <h3>"{props.quote}"</h3>} 
+            {props.error && <p className="error">{props.error}</p>} 
+            <button 
+            style={{padding: "10px",
+             color: "white",
+             backgroundColor:"black"
+            }}
+              onClick={props.fetchQuote}>Grab a new Quote</button>          
         </div>
     )
 }
 
 const mayStateToProps = state => {
-    console.log(state);
+    // console.log(state);
     return {
         quote: state.quotes.quote,
         isFetching: state.quotes.isFetching,

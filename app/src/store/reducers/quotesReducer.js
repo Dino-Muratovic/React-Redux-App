@@ -13,6 +13,21 @@ export const quotesReducer = (state = initialState, action) => {
                 isFetching: true
             }
 
+        case "FETCH_QUOTE_SUCESS":
+            return {
+                ...state,
+                isFetching: false,
+                quote: action.payload,
+                error: ''
+            } 
+            
+        case "FETCH_QUOTE_ERROR":
+            return {
+                ...state, 
+                isFetching: false,
+                error: action.payload
+            }    
+
         default:
             return state;
     }
